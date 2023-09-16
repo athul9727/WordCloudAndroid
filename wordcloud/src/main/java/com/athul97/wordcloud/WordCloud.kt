@@ -1,4 +1,15 @@
 package com.athul97.wordcloud
 
-class WordCloud {
-}
+
+    data class WordCloud(
+        /**
+         * The Text.
+         */
+        var text: String,
+        /**
+         * The Weight.
+         */
+        var weight: Int
+    )
+
+

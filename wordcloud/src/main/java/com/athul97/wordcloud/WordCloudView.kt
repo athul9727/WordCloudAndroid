@@ -1,4 +1,164 @@
 package com.athul97.wordcloud
 
-class WordCloudView {
-}
+import android.annotation.SuppressLint
+import android.content.Context
+import android.util.AttributeSet
+import android.webkit.WebSettings
+import android.webkit.WebView
+import java.util.Random
+
+
+    class WordCloudView(private val mContext: Context, attrs: AttributeSet?) : WebView(mContext, attrs) {
+        private var dataSet: List<WordCloud>
+        private var old_min = 0
+        private var old_max = 0
+        private var colors: IntArray
+        private val random: Random
+        private var parentHeight: Int
+        private var parentWidth: Int
+        private var max: Int
+        private var min: Int
+
+        /**
+         * Instantiates a new Word cloud view.
+         *
+         * @param context the context
+         * @param attrs   the attrs
+         */
+        init {
+            dataSet = ArrayList()
+            parentHeight = 300
+            parentWidth = 450
+            max = 100
+            min = 20
+            colors = IntArray(0)
+            random = Random()
+            //  init();
+        }
+
+        /**
+         * Init.
+         */
+        @SuppressLint("AddJavascriptInterface", "SetJavaScriptEnabled")
+        fun init() {
+            val myJavascriptInterface = JavascriptInterface(mContext)
+            myJavascriptInterface
+                .setCloudParams("", data, "FreeSans", parentWidth, parentHeight)
+            addJavascriptInterface(myJavascriptInterface, "jsinterface")
+            val webSettings = settings
+            webSettings.builtInZoomControls = false
+            webSettings.javaScriptEnabled = true
+
+            // Use HTML5 localstorage to maintain app state
+            webSettings.defaultTextEncodingName = "utf-8"
+            this.clearCache(true)
+            this.clearHistory()
+            webSettings.cacheMode = WebSettings.LOAD_NO_CACHE;
+            webSettings.allowFileAccess = false
+            webSettings.loadWithOverviewMode = false
+            webSettings.useWideViewPort = true
+            webSettings.userAgentString = "Android"
+            loadUrl("file:///android_asset/wordcloud.html")
+        }
+
+        /**
+         * Sets data set.
+         *
+         * @param dataSet the data set
+         */
+        fun setDataSet(dataSet: List<WordCloud>) {
+            this.dataSet = dataSet
+        }
+
+        /**
+         * Notify data set changed.
+         */
+        fun notifyDataSetChanged() {
+            updateMaxMinValues()
+            init()
+        }
+
+        /**
+         * Gets data.
+         *
+         * @return the data
+         */
+        private val data: String
+            get() {
+                val sb = StringBuilder()
+                sb.append("[")
+                for (i in dataSet.indices) {
+                    sb.append("{\"word\":\"").append(dataSet[i].text)
+                    sb.append("\",\"size\":\"").append(scale(dataSet[i].weight))
+                    sb.append("\",\"color\":\"")
+                    sb.append(color).append("\"}")
+                    if (i < dataSet.size - 1) {
+                        sb.append(",")
+                    }
+                }
+                sb.append("]")
+                return sb.toString()
+            }
+
+        override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+            parentWidth = MeasureSpec.getSize(widthMeasureSpec)
+            parentHeight = MeasureSpec.getSize(heightMeasureSpec)
+            setMeasuredDimension(parentWidth, parentHeight)
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        }
+
+
+        override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+            parentWidth = w
+            parentHeight = h
+            super.onSizeChanged(w, h, oldw, oldh)
+        }
+
+        private fun scale(inputY: Int): Float {
+            val x = (inputY - old_min).toFloat()
+            val y = (old_max - old_min).toFloat()
+            val percent = x / y
+            return percent * (max - min) + min
+        }
+
+        private fun updateMaxMinValues() {
+            old_min = Int.MAX_VALUE
+            old_max = Int.MIN_VALUE
+            for (wordCloud in dataSet) {
+                if (wordCloud.weight < old_min) {
+                    old_min = wordCloud.weight
+                }
+                if (wordCloud.weight > old_max) {
+                    old_max = wordCloud.weight
+                }
+            }
+        }
+
+        fun setColors(colors: IntArray) {
+            this.colors = colors
+        }
+
+        private val color: String
+            get() = if (colors.isEmpty()) "0" else "#" + Integer.toHexString(
+                colors[random.nextInt(colors.size - 1)]
+            ).substring(2)
+
+        /**
+         * View size.
+         *
+         * @param width  the width
+         * @param height the height
+         */
+        fun setSize(width: Int, height: Int) {
+            parentWidth = width
+            parentHeight = height
+        }
+
+        fun setScale(max: Int, min: Int) {
+            if (min > max) {
+                throw RuntimeException("MIN scale cannot be larger than MAX")
+            }
+            this.max = max
+            this.min = min
+        }
+    }
