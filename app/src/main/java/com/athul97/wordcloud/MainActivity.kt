@@ -2,16 +2,17 @@ package com.athul97.wordcloud
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var wordCloudView: WordCloudView
     private val testData = listOf<WordCloud>(
-        WordCloud("dog",1),
+        WordCloud("dog",1,"#000"),
         WordCloud("cat",2),
-        WordCloud("parrot",3),
+        WordCloud("parrot",3,"#000"),
         WordCloud("crow",4),
-        WordCloud("cow",5)
+        WordCloud("cow",5,"#000")
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +20,9 @@ class MainActivity : AppCompatActivity() {
 
         wordCloudView = findViewById(R.id.wordcloud)
         wordCloudView.setDataSet(testData)
-        wordCloudView.setColors(ColorTemplate.MATERIAL_COLORS);
+        wordCloudView.getWordClicked {
+            Log.e("CURRENT_WORD::",it.toString())
+        }
         wordCloudView.notifyDataSetChanged()
 
     }

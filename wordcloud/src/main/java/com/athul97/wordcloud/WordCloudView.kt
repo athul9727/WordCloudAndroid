@@ -2,14 +2,17 @@ package com.athul97.wordcloud
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Looper
 import android.util.AttributeSet
+import android.util.Log
 import android.webkit.WebSettings
 import android.webkit.WebView
-import android.widget.Toast
 import java.util.Random
+import java.util.Timer
+import java.util.logging.Handler
+import kotlin.concurrent.schedule
 
-
-    class WordCloudView(private val mContext: Context, attrs: AttributeSet?) : WebView(mContext, attrs) {
+class WordCloudView(private val mContext: Context, attrs: AttributeSet?) : WebView(mContext, attrs) {
         private var dataSet: List<WordCloud>
         private var old_min = 0
         private var old_max = 0
@@ -19,6 +22,9 @@ import java.util.Random
         private var parentWidth: Int
         private var max: Int
         private var min: Int
+        private var rotation:RotationType = RotationType.VERTICAL_HORIZONTAL
+        private var wordCallback: (result: String?) -> Unit = {}
+
 
         /**
          * Instantiates a new Word cloud view.
@@ -28,11 +34,11 @@ import java.util.Random
          */
         init {
             dataSet = ArrayList()
-            parentHeight = 300
-            parentWidth = 450
+            parentHeight = 350
+            parentWidth = 350
             max = 100
             min = 20
-            colors = IntArray(0)
+            colors = ColorTemplate.MATERIAL_COLORS
             random = Random()
             //  init();
         }
@@ -43,11 +49,8 @@ import java.util.Random
         @SuppressLint("AddJavascriptInterface", "SetJavaScriptEnabled")
         fun init() {
             val myJavascriptInterface = JavascriptInterface(mContext)
-            myJavascriptInterface.setCloudParams("", data, "FreeSans", parentWidth, parentHeight){
-
-                Toast.makeText(mContext, it, Toast.LENGTH_SHORT).show()
-
-            }
+            Log.d("CloudString::", data)
+            myJavascriptInterface.setCloudParams("", data, "FreeSans", parentWidth, parentHeight,rotation,wordCallback)
             addJavascriptInterface(myJavascriptInterface, "jsinterface")
             val webSettings = settings
             webSettings.builtInZoomControls = false
@@ -62,6 +65,7 @@ import java.util.Random
             webSettings.useWideViewPort = true
             webSettings.userAgentString = "Android"
             loadUrl("file:///android_asset/wordcloud.html")
+
         }
 
         /**
@@ -73,12 +77,20 @@ import java.util.Random
             this.dataSet = dataSet
         }
 
+        fun setRotationType(rotationType: RotationType){
+            this.rotation = rotationType
+        }
+        fun getWordClicked(wordCallback: (result: String?) -> Unit){
+            this.wordCallback = wordCallback
+        }
+
         /**
          * Notify data set changed.
          */
         fun notifyDataSetChanged() {
             updateMaxMinValues()
             init()
+
         }
 
         /**
@@ -94,10 +106,17 @@ import java.util.Random
                     sb.append("{\"word\":\"").append(dataSet[i].text)
                     sb.append("\",\"size\":\"").append(scale(dataSet[i].weight))
                     sb.append("\",\"color\":\"")
-                    sb.append(color).append("\"}")
+                    if(dataSet[i].color==null) {
+                        sb.append(color)
+                    }
+                    else{
+                        sb.append(dataSet[i].color)
+                    }
+                        sb.append("\"}")
                     if (i < dataSet.size - 1) {
                         sb.append(",")
                     }
+
                 }
                 sb.append("]")
                 return sb.toString()
