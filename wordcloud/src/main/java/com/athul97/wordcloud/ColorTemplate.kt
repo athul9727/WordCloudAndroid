@@ -5,6 +5,8 @@ import android.graphics.Color
 
 
 class ColorTemplate {
+
+    companion object {
         /**
          * THE COLOR THEMES ARE PREDEFINED (predefined color integer arrays), FEEL
          * FREE TO CREATE YOUR OWN WITH AS MANY DIFFERENT COLORS AS YOU WANT
@@ -81,5 +83,6 @@ class ColorTemplate {
             }
             return result
         }
+    }
 
 }

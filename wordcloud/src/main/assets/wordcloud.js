@@ -1,3 +1,5 @@
+
+
 var loadCloud = function(isAndroid, element, userChosenFontFace, data,parentWidth, parentHeight) {
 
   console.log('parentWidth: ' + parentWidth);
@@ -10,7 +12,7 @@ var t = test.map(function(d) {  return {text: d.word, size: d.size, color: d.col
     var fill = d3.scale.category20();
     var layout = d3.layout.cloud()
         .size([parentHeight, parentWidth ])
-       .words(t)
+        .words(t)
         .padding(5)
         .rotate(function() { return ~~(Math.random() * 2) * 90; })
         .font(userChosenFontFace)
@@ -40,7 +42,11 @@ var t = test.map(function(d) {  return {text: d.word, size: d.size, color: d.col
           .attr("transform", function(d) {
             return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
           })
-          .text(function(d) { return d.text; });
+          .text(function(d) { return d.text; })
+          .on("click", function(d) {
+              console.log(d.text);
+              window.jsinterface.showToast(d.text);
+            });
     }
 }
 

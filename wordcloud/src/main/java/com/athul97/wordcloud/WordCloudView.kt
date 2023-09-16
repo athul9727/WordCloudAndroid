@@ -5,6 +5,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.webkit.WebSettings
 import android.webkit.WebView
+import android.widget.Toast
 import java.util.Random
 
 
@@ -42,13 +43,15 @@ import java.util.Random
         @SuppressLint("AddJavascriptInterface", "SetJavaScriptEnabled")
         fun init() {
             val myJavascriptInterface = JavascriptInterface(mContext)
-            myJavascriptInterface
-                .setCloudParams("", data, "FreeSans", parentWidth, parentHeight)
+            myJavascriptInterface.setCloudParams("", data, "FreeSans", parentWidth, parentHeight){
+
+                Toast.makeText(mContext, it, Toast.LENGTH_SHORT).show()
+
+            }
             addJavascriptInterface(myJavascriptInterface, "jsinterface")
             val webSettings = settings
             webSettings.builtInZoomControls = false
             webSettings.javaScriptEnabled = true
-
             // Use HTML5 localstorage to maintain app state
             webSettings.defaultTextEncodingName = "utf-8"
             this.clearCache(true)
@@ -100,6 +103,7 @@ import java.util.Random
                 return sb.toString()
             }
 
+        @Deprecated("Deprecated in Java")
         override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
             parentWidth = MeasureSpec.getSize(widthMeasureSpec)
             parentHeight = MeasureSpec.getSize(heightMeasureSpec)
