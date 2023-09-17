@@ -1,7 +1,7 @@
 # WordCloudAndroid
 WordCloudAndroid in kotlin
 
-[![](https://jitpack.io/v/athul9727/WordCloudAndroid.svg)] (https://jitpack.io/#athul9727/WordCloudAndroid)
+[![](https://jitpack.io/v/athul9727/WordCloudAndroid.svg)](https://jitpack.io/#athul9727/WordCloudAndroid)
 
 
 
