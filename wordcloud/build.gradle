@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 33
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -29,10 +29,16 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
-
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
@@ -41,13 +47,26 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
 
-afterEvaluate {
-    android.libraryVariants.each{variant->
-        publishing.publications.create(variant.name, MavenPublication){
-            from components.findByName(variant.name)
-            groupId = 'com.athul97'
+//afterEvaluate {
+//    android.libraryVariants.each{variant->
+//        publishing.publications.create(variant.name, MavenPublication){
+//            from components.findByName(variant.name)
+//            groupId = 'com.athul97'
+//            artifactId = "wordcloud"
+//            version = '1.0.0'
+//        } //
+//    }
+//}
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = "com.athul97"
             artifactId = "wordcloud"
-            version = '1.0.0'
-        } //
+            version = "1.0.3'"
+
+            afterEvaluate {
+                from components.release
+            }
+        }
     }
 }
