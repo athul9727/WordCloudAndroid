@@ -14,7 +14,7 @@ WordCloudAndroid in kotlin
 
 ```gradle
 dependencies {
-    implementation 'com.github.athul9727:WordCloudAndroid:1.0.0'
+    implementation 'com.github.athul9727:WordCloudAndroid:1.8'
 }
 ```
 
