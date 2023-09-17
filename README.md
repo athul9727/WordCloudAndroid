@@ -24,6 +24,14 @@ To use the library, you must include the WordCloudView class in your project. A 
 Then, within your code, fetch the view and initialize it:
 
 ```kotlin
+
+private val testData = listOf<WordCloud>(
+        WordCloud("dog",1,"#000"),
+        WordCloud("cat",2),
+        WordCloud("parrot",3,"#000"),
+        WordCloud("crow",4),
+        WordCloud("cow",5,"#000")
+
  val wordCloudView: WordCloudView = findViewById(R.id.wordcloud)
         wordCloudView.setDataSet(testData)
         wordCloudView.notifyDataSetChanged()
@@ -31,22 +39,30 @@ Then, within your code, fetch the view and initialize it:
 
 And make sure to call `notifyDataSetChanged` to update view.
 
-## Additional Options
 ###Setting Color
 
-there's two option to change the colors, either by passing an array of `int` or by using a predefined colors from `ColorTemplate` class
-
 ```kotlin
-wordCloudView.setColors(ColorTemplate.MATERIAL_COLORS);
+wordCloudView.setColors(ColorTemplate.LIBERTY_COLORS); // default is ColorTemplate.MATERIAL_COLORS
 //OR
 wordCloudView.setColors(new int[] {Color.BLUE, Color.GRAY, Color.GREEN, Color.CYAN });
+//OR
+//set color as hex string for each word as below
+//if no color provided then color will choosen from ColorTemplate 
+WordCloud("dog",1,"#000")
+
 ```
 ###Setting Scale Values
 
 ```kotlin
 wordCloudView.setScale(MAX,MIN);
 ```
+###Getting word clicked
 
+```kotlin
+      wordCloudView.getWordClicked {
+            Log.e("CURRENT_WORD::",it.toString())
+        }
+```
 
 ## Credits
 - [d3-cloud](https://github.com/jasondavies/d3-cloud)
