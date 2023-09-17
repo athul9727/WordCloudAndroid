@@ -3,8 +3,6 @@ WordCloudAndroid in kotlin
 
 [![](https://jitpack.io/v/athul9727/WordCloudAndroid.svg)](https://jitpack.io/#athul9727/WordCloudAndroid)
 
-
-
 ## Screenshots
 
 ![Screenshot_20230917_173436](https://github.com/athul9727/WordCloudAndroid/assets/99319393/4bfbf702-47a1-4851-b61f-26ebee8f19de)
