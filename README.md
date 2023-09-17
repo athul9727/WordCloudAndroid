@@ -79,7 +79,7 @@ setup rotation as vertical, horizontal or both
    wordCloudView.setSize(width,height);
 ```
 
-<img src="[https://your-image-url.type](https://github.com/athul9727/WordCloudAndroid/assets/99319393/c28340ca-1b4a-457d-b5c9-00fee26d0983)" width="100" height="100">
+<img src="https://your-image-url.type](https://github.com/athul9727/WordCloudAndroid/assets/99319393/c28340ca-1b4a-457d-b5c9-00fee26d0983)" width="100" height="100">
 
 
 ## Credits
