@@ -2,9 +2,7 @@
 WordCloudAndroid in kotlin
 
 ## Screenshots
-<img src="https://github.com/athul9727/WordCloudAndroid/assets/99319393/c28340ca-1b4a-457d-b5c9-00fee26d0983" width="400">
-<br>
-<img src="https://github.com/athul9727/WordCloudAndroid/assets/99319393/c75e1ed1-97b3-45c5-b3db-aabb28d53768" width="400">
+![image](https://github.com/athul9727/WordCloudAndroid/assets/99319393/73eca674-c4b7-4246-86d4-102f2d6a0f55)
 
 ## Installation
 
