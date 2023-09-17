@@ -9,7 +9,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.athul97.wordcloud"
+        applicationId "com.athul97.wordcloudexample"
         multiDexEnabled true
         minSdk 21
         targetSdk 33
