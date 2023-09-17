@@ -36,21 +36,17 @@ And make sure to call `notifyDataSetChanged` to update view.
 
 there's two option to change the colors, either by passing an array of `int` or by using a predefined colors from `ColorTemplate` class
 
-```java
-wordCloud.setColors(ColorTemplate.MATERIAL_COLORS);
+```kotlin
+wordCloudView.setColors(ColorTemplate.MATERIAL_COLORS);
 //OR
-wordCloud.setColors(new int[] {Color.BLUE, Color.GRAY, Color.GREEN, Color.CYAN });
+wordCloudView.setColors(new int[] {Color.BLUE, Color.GRAY, Color.GREEN, Color.CYAN });
 ```
 ###Setting Scale Values
 
-```java
-wordCloud.setScale(MAX,MIN);
+```kotlin
+wordCloudView.setScale(MAX,MIN);
 ```
 
-## Features to be added:
-- `onClickEvent` for each word.
-- ~~Custom color for each word~~.
-- Custom font.
 
 ## Credits
 - [d3-cloud](https://github.com/jasondavies/d3-cloud)
