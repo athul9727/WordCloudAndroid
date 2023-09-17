@@ -69,7 +69,8 @@ wordCloudView.setScale(MAX,MIN);
 setup rotation as vertical, horizontal or both
 
 ```kotlin
-    wordCloudView.setRotationType(RotationType.VERTICAL) //default rotation type is RotationType.VERTICAL_HORIZONTAL
+   //default rotation type is RotationType.VERTICAL_HORIZONTAL
+    wordCloudView.setRotationType(RotationType.VERTICAL)
 ```
 
 ###Setting Size
