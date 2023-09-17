@@ -42,13 +42,13 @@ And make sure to call `notifyDataSetChanged` to update view.
 ###Setting Color
 
 ```kotlin
+
 wordCloudView.setColors(ColorTemplate.LIBERTY_COLORS); // default is ColorTemplate.MATERIAL_COLORS
 //OR
 wordCloudView.setColors(new int[] {Color.BLUE, Color.GRAY, Color.GREEN, Color.CYAN });
 //OR
 //set color as hex string for each word as below
-//if no color provided then color will choosen from ColorTemplate 
-WordCloud("dog",1,"#000")
+WordCloud("dog",1,"#000") //if no color provided then color will be choosen from ColorTemplate 
 
 ```
 ###Setting Scale Values
