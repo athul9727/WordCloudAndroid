@@ -80,6 +80,7 @@ setup rotation as vertical, horizontal or both
 ```
 
 <img src="https://github.com/athul9727/WordCloudAndroid/assets/99319393/c28340ca-1b4a-457d-b5c9-00fee26d0983" width="300" height="600">
+<img src="https://github.com/athul9727/WordCloudAndroid/assets/99319393/c28340ca-1b4a-457d-b5c9-00fee26d0983" width="300" height="600">
 
 
 ## Credits
