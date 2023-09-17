@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
     id 'maven-publish'
 }
 
@@ -30,7 +31,12 @@ android {
         jvmTarget = '1.8'
     }
     publishing {
-        singleVariant("release") {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+
+        singleVariant('debug') {
             withSourcesJar()
             withJavadocJar()
         }
@@ -57,15 +63,41 @@ dependencies {
 //        } //
 //    }
 //}
-publishing {
-    publications {
-        release(MavenPublication) {
-            groupId = "com.github.athul9727"
-            artifactId = "WordCloudAndroid"
-            version = "1.0.4"
+//publishing {
+//    publications {
+//        release(MavenPublication) {
+//            groupId = "com.github.athul9727"
+//            artifactId = "WordCloudAndroid"
+//            version = "1.0.4"
+//
+//            afterEvaluate {
+//                from components.release
+//            }
+//        }
+//    }
+//}
 
-            afterEvaluate {
-                from components.release
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                components.getByName('release')
+
+                // You can then customize attributes of the publication as shown below.
+                groupId = "com.athul97.wordcloud"
+                artifactId = "wordcloud"
+                version = '1.0.5'
+            }
+            // Creates a Maven publication called “debug”.
+            debug(MavenPublication) {
+                // Applies the component for the debug build variant.
+                components.getByName('debug')
+
+                groupId = "com.athul97.wordcloud"
+                artifactId = "wordcloud"
+                version = '1.0.5'
             }
         }
     }
