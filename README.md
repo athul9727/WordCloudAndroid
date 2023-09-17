@@ -50,6 +50,7 @@ wordCloudView.setScale(MAX,MIN);
 
 ## Credits
 - [d3-cloud](https://github.com/jasondavies/d3-cloud)
+- https://github.com/alhazmy13/AndroidWordCloud
 
 
 
