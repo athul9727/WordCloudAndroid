@@ -64,6 +64,20 @@ wordCloudView.setScale(MAX,MIN);
         }
 ```
 
+###Setting Word Rotation Type
+
+setup rotation as vertical, horizontal or both
+
+```kotlin
+    wordCloudView.setRotationType(RotationType.VERTICAL) //default rotation type is RotationType.VERTICAL_HORIZONTAL
+```
+
+###Setting Size
+
+```kotlin
+   wordCloudView.setSize(width,height);
+```
+
 ## Credits
 - [d3-cloud](https://github.com/jasondavies/d3-cloud)
 - https://github.com/alhazmy13/AndroidWordCloud
