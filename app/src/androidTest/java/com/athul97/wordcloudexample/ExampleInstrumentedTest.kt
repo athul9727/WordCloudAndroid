@@ -1,4 +1,4 @@
-package com.athul97.wordcloud
+package com.athul97.wordcloudexample
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

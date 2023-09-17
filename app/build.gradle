@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.athul97.wordcloud'
+    namespace 'com.athul97.wordcloudexample'
     compileSdk 33
 
     defaultConfig {

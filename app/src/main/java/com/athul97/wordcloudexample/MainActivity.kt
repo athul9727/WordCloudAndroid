@@ -1,8 +1,10 @@
-package com.athul97.wordcloud
+package com.athul97.wordcloudexample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.athul97.wordcloud.WordCloud
+import com.athul97.wordcloud.WordCloudView
 
 class MainActivity : AppCompatActivity() {
 

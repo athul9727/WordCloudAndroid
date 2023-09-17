@@ -1,4 +1,4 @@
-package com.athul97.wordcloud
+package com.athul97.wordcloudexample
 
 import org.junit.Test
 
