@@ -23,7 +23,7 @@ To use the library, you must include the WordCloudView class in your project. A 
 
 Then, within your code, fetch the view and initialize it:
 
-```java
+```kotlin
  val wordCloudView: WordCloudView = findViewById(R.id.wordcloud)
         wordCloudView.setDataSet(testData)
         wordCloudView.notifyDataSetChanged()
