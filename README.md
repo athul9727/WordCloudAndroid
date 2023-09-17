@@ -7,7 +7,7 @@ WordCloudAndroid
 
 ```gradle
 dependencies {
-	compile 'net.alhazmy13.wordcloud:library:0.2.0-beta'
+    implementation "com.github.athul9727:WordCloudAndroid:1.0.0"
 }
 ```
 
@@ -15,18 +15,18 @@ dependencies {
 To use the library, you must include the WordCloudView class in your project. A simple solution is to reference it directly into your layout:
 
 ```xml
-<net.alhazmy13.wordcloud.WordCloudView
-       android:id="@+id/wordCloud"
+<com.athul97.wordcloud.WordCloudView
+       android:id="@+id/wordcloud"
        android:layout_width="match_parent"
-       android:layout_height="match_parent" />
+       android:layout_height="wrap_content"/>
 ```
 
 Then, within your code, fetch the view and initialize it:
 
 ```java
-WordCloudView wordCloud = (WordCloudView) findViewById(R.id.wordCloud);
-        wordCloud.setDataSet(list);
-        wordCloud.notifyDataSetChanged();
+ val wordCloudView: WordCloudView = findViewById(R.id.wordcloud)
+        wordCloudView.setDataSet(testData)
+        wordCloudView.notifyDataSetChanged()
 ```
 
 And make sure to call `notifyDataSetChanged` to update view.
